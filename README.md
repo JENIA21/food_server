@@ -1,4 +1,4 @@
 # food_server
-##server for the site and application for cooking
-##server - fastapi 
-##db - postgres
+## server for the site and application for cooking
+## server - fastapi 
+## db - postgres
