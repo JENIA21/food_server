@@ -2,9 +2,11 @@ version: "3.9"
 services:
   postgres:
     image: postgres:13.3
+    restart: always
+    container_name: 'app_db'
     environment:
-      POSTGRES_DB: "dbfood"
-      POSTGRES_USER: "root"
-      POSTGRES_PASSWORD: "food"
+      POSTGRES_DB: \${POSTGRES_DB}
+      POSTGRES_USER: \${POSTGRES_USER}
+      POSTGRES_PASSWORD: \${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
