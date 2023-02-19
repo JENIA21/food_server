@@ -1,10 +1,10 @@
 import sqlalchemy
-from sqlalchemy import Integer, String, Column
 
 metadata = sqlalchemy.MetaData()
 
 recipes = sqlalchemy.Table('recipes', metadata,
-                           Column('id', Integer(), primary_key=True),
-                           Column('description', String(10000), ),
-                           Column('time', Integer()),
+                           sqlalchemy.Column('id', sqlalchemy.Integer(), primary_key=True),
+                           sqlalchemy.Column('name', sqlalchemy.String(100)),
+                           sqlalchemy.Column('description', sqlalchemy.Text(), ),
+                           sqlalchemy.Column('time', sqlalchemy.Integer()),
                            )
