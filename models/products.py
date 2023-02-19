@@ -1,19 +1,16 @@
 from sqlalchemy import Integer, String, Column, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from .recipes import recipes
 import sqlalchemy
 
-Base = declarative_base()
+metadata = sqlalchemy.MetaData()
 
-recipes_and_product = sqlalchemy.Table('recipes_and_product', Base.metadata,
-                                       Column('recipes_id', Integer(), ForeignKey("recipes.id")),
-                                       Column('products_id', Integer(), ForeignKey("products.id"))
+recipes_and_product = sqlalchemy.Table('recipes_and_product', metadata,
+                                       Column('recipes_id', Integer(), ForeignKey(recipes.c.id)),
+                                       Column('products_id', Integer(), ForeignKey('product.id'))
                                        )
 
-
-class Products(Base):
-    __tablename__ = 'products'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(10000), nullable=False)
-    recipes_id = Column(Integer, ForeignKey('recipes.id'))
-    recipes = relationship("Recipes", secondary=recipes_and_product, backref="products")
+product = sqlalchemy.Table('product', metadata,
+                           Column('id', Integer(), primary_key=True),
+                           Column('name', String(100), ForeignKey('product.id')),
+                           Column('recipes_id', Integer(), ForeignKey(recipes.c.id)),
+                           )

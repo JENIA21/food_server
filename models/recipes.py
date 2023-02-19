@@ -1,11 +1,10 @@
+import sqlalchemy
 from sqlalchemy import Integer, String, Column
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+metadata = sqlalchemy.MetaData()
 
-
-class Recipes(Base):
-    __tablename__ = 'recipes'
-    id = Column(Integer, primary_key=True)
-    description = Column(String(10000), nullable=False)
-    time = Column(Integer, nullable=False)
+recipes = sqlalchemy.Table('recipes', metadata,
+                           Column('id', Integer(), primary_key=True),
+                           Column('description', String(10000), ),
+                           Column('time', Integer()),
+                           )
